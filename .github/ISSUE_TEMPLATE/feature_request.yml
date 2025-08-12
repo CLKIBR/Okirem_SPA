@@ -1,0 +1,19 @@
+name: Özellik İsteği
+description: Yeni bir ürün özelliği talebi
+labels: ["feature"]
+body:
+  - type: input
+    id: context
+    attributes:
+      label: Bağlam
+      description: Neden gerekli?
+  - type: textarea
+    id: spec
+    attributes:
+      label: Gereksinimler & Kabul Kriterleri
+      description: Net, test edilebilir kriterler
+  - type: textarea
+    id: impact
+    attributes:
+      label: Etki
+      description: Kullanıcı ve teknik etki

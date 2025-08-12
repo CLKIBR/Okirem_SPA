@@ -1,0 +1,16 @@
+name: Teknik Borç
+description: Refactor/iyileştirme talebi
+labels: ["tech-debt"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Sorun
+  - type: textarea
+    id: plan
+    attributes:
+      label: Plan
+  - type: input
+    id: risk
+    attributes:
+      label: Risk

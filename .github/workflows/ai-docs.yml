@@ -1,0 +1,26 @@
+name: AI Docs Sync
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install deps
+        run: npm i -D glob@11.0.0
+      - name: Generate AI docs
+        run: node scripts/ai/docgen.mjs
+      - name: Commit changes
+        run: |
+          git config user.name "ai-docs-bot"
+          git config user.email "ai-docs-bot@example.com"
+          git add docs/PROJECT_SNAPSHOT.md docs/ai/AI_CONTEXT.md || true
+          git commit -m "chore(ai): sync AI docs" || echo "No changes"
+          git push

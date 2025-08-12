@@ -1,0 +1,512 @@
+# Faz 0 – İskelet ve Kurumsal Altyapı
+- **Repo/Monorepo Stratejisi & Klasörleme** (frontend=Angular 20.1.6, backend=nArchitecture.Gen 1.2.2)
+    - Monorepo/çoklu repo stratejisinin karar kaydı (ADR) ile belgelenmesi
+    - Klasör hiyerarşisinin mimari diyagram ile gösterilmesi
+    - Modül bağımlılıklarının incelenmesi ve raporlanması
+    - Kod tabanında modül sınırlarının belirlenmesi
+    - Ortak kütüphanelerin ve paylaşılan kodun ayrıştırılması
+    - Klasör ve dosya isimlendirme standartlarının dokümantasyonu
+    - Arşivleme ve yedekleme politikalarının belirlenmesi
+- **Kod Standartları** (ESLint/Prettier/Stylelint, TypeScript strict, .editorconfig)
+    - ESLint/Prettier/Stylelint kurallarının CI/CD’ye entegre edilmesi
+    - Kod inceleme checklist’inin hazırlanması ve ekibe yayılması
+    - .editorconfig dosyasının tüm ekip IDE’lerine dağıtılması
+    - TypeScript strict modunun zorunlu kılınması
+    - Kod standartlarının onboarding dokümantasyonuna eklenmesi
+    - Otomatik formatlama ve linting scriptlerinin hazırlanması
+    - Kod kalitesi metriklerinin periyodik raporlanması
+- **Commit & Sürüm Yönetimi** (Conventional Commits, SemVer, CHANGELOG, release/tag)
+    - Conventional Commit kurallarının eğitim dokümanı hazırlanması
+    - Otomatik CHANGELOG üretimi için script entegrasyonu
+    - Sürüm etiketleme ve geri alma prosedürlerinin tanımlanması
+    - SemVer stratejisinin karar kaydı ile belgelenmesi
+    - Release/tag süreçlerinin CI/CD ile otomasyonu
+    - Sürüm notlarının merkezi depoda tutulması
+    - Geriye dönük sürüm inceleme ve rollback prosedürleri
+- **CI/CD Boru Hattı** (lint, type-check, unit/integration, coverage, build, container, deploy)
+    - Pipeline şeması ve onay akışlarının dokümantasyonu
+    - Test ve coverage raporlarının merkezi depoda saklanması
+    - Otomatik build ve deploy için rollback senaryolarının hazırlanması
+    - CI/CD pipeline’ında güvenlik taramalarının zorunlu kılınması
+    - Pipeline adımlarının loglanması ve izlenebilirliğinin sağlanması
+    - Fail-fast ve notification mekanizmalarının kurulması
+    - Ortam bazlı pipeline varyasyonlarının dokümantasyonu
+- **Mimari Temeller** (Clean Architecture, DDD/CQRS katman sınırları, DTO/Mapper politikaları)
+    - Katmanlar arası bağımlılıkların diyagram ile gösterilmesi
+    - DTO/Mapper politikalarının kod örnekleriyle dokümantasyonu
+    - DDD/CQRS eğitim oturumu ve kayıtlarının paylaşılması
+    - Katman sınırlarının kodda ve dokümanda netleştirilmesi
+    - Domain servislerinin ve entity’lerin ayrıştırılması
+    - Mapper ve DTO test senaryolarının hazırlanması
+    - Mimari kararların ADR ile belgelenmesi
+- **Güvenlik Temelleri** (SAST/DAST, dependency scanning, güvenli header, CORS/CSRF, rate limit)
+    - SAST/DAST araçlarının CI/CD’ye entegrasyonu
+    - Güvenli header ve CORS/CSRF politikalarının checklist ile takibi
+    - Rate limit ve abuse önleme için merkezi konfigürasyon
+    - Dependency scanning raporlarının periyodik incelenmesi
+    - Güvenlik açıklarının hızlı kapatılması için süreç tanımı
+    - Güvenlik testlerinin otomasyonu ve loglanması
+    - Güvenlik dokümantasyonunun merkezi depoda tutulması
+- **Konfigürasyon & Sırlar** (12-Factor, .env şablonları, secret yönetimi, feature flags)
+    - Ortam bazlı .env şablonlarının merkezi yönetimi
+    - Secret rotasyonu ve erişim loglarının takibi
+    - Feature flag yönetimi için dashboard kurulumu
+    - 12-Factor uygulama prensiplerinin dokümantasyonu
+    - Konfigürasyon değişikliklerinin izlenmesi ve loglanması
+    - Secret yönetimi için erişim kontrol politikalarının belirlenmesi
+    - Feature flag test ve rollback senaryolarının hazırlanması
+- **Gözlemlenebilirlik** (merkezi log, metrik, iz; health/readiness/liveness endpoint’leri)
+    - Log ve metriklerin merkezi izleme sistemine entegrasyonu
+    - Health/readiness/liveness endpoint’lerinin test senaryoları ile doğrulanması
+    - İzleme ve alarm kurallarının dokümantasyonu
+    - Log retention ve arşivleme politikalarının belirlenmesi
+    - İz ve metriklerin dashboard’da görselleştirilmesi
+    - Olay yönetimi ve alert süreçlerinin tanımlanması
+    - İzleme araçlarının güncel tutulması ve bakım prosedürleri
+- **Dokümantasyon & Karar Yönetimi** (architecture.md, ADR, decision-log, katkı rehberi)
+    - architecture.md ve ADR şablonlarının merkezi depoda tutulması
+    - Karar kayıtlarının periyodik gözden geçirilmesi
+    - Katkı rehberinin onboarding sürecine entegre edilmesi
+    - Decision-log güncellemelerinin versiyonlanması
+    - Dokümantasyonun erişilebilir ve güncel tutulması
+    - Katkı rehberi ve kod inceleme rehberinin eğitimlerde kullanılması
+    - Mimari kararların paydaşlarla düzenli paylaşılması
+- **Altyapı & Dağıtım** (Docker, IaC/Terraform opsiyonu, ortamlar: dev/stage/prod)
+    - Docker imajlarının güvenlik taramasından geçirilmesi
+    - IaC/Terraform kodlarının versiyonlanması ve review süreci
+    - Ortamlar arası geçiş prosedürlerinin dokümantasyonu
+    - Dağıtım scriptlerinin otomasyonu ve test edilmesi
+    - Ortamlar için ayrı konfigürasyon ve erişim kontrolü
+    - Yedekleme ve felaket kurtarma planlarının hazırlanması
+    - Dağıtım sonrası doğrulama ve rollback prosedürleri
+- **Erişilebilirlik & i18n Tabanı** (WCAG başlangıç, TR/EN dosyaları, RTL hazırlığı)
+    - WCAG checklist’inin proje board’unda takibi
+    - TR/EN dosyalarının merkezi yönetimi ve test senaryoları
+    - RTL desteği için UI bileşenlerinin gözden geçirilmesi
+    - Erişilebilirlik testlerinin otomasyonu ve raporlanması
+    - i18n dosyalarının versiyonlanması ve güncel tutulması
+    - Erişilebilirlik dokümantasyonunun merkezi depoda tutulması
+    - Kullanıcı geri bildirimlerinin erişilebilirlik iyileştirmelerine entegre edilmesi
+
+# Faz 1 – Temel Domain, Kullanıcı ve Öğrenme Çekirdeği
+- **Kimlik & Yetki** (JWT/Refresh, RBAC, oturum politikaları, 2FA/SSO hazır kancaları)
+    - JWT/Refresh token yönetimi için merkezi anahtar rotasyonu
+    - RBAC matrisinin dokümantasyonu ve periyodik gözden geçirilmesi
+    - Oturum politikalarının merkezi yönetimi ve loglanması
+    - 2FA/SSO entegrasyon testlerinin hazırlanması
+    - Kimlik doğrulama süreçlerinin güvenlik denetimi
+    - Yetki ve rol değişikliklerinin izlenmesi
+    - Kimlik yönetimi dokümantasyonunun güncel tutulması
+- **Kullanıcı Profili & Gizlilik** (KVKK odaklı izin/aydınlatma, bildirim tercihleri)
+    - KVKK metinlerinin güncel tutulması ve erişim loglarının takibi
+    - Bildirim tercihleri için kullanıcı arayüzü testleri
+    - Gizlilik ayarlarının merkezi yönetimi
+    - Kullanıcı veri saklama ve anonimleştirme politikalarının uygulanması
+    - Profil güncellemelerinin loglanması ve raporlanması
+    - KVKK/GDPR uyum denetimlerinin periyodik yapılması
+    - Gizlilik ihlali durumunda olay yönetimi prosedürleri
+- **Kurs/İçerik Yönetimi** (kurs–modül–içerik; video/metin/quiz; yayınlama, önkoşul, sıralama)
+    - İçerik tiplerinin (video/metin/quiz) test senaryoları ile doğrulanması
+    - Yayınlama ve önkoşul kurallarının merkezi yönetimi
+    - Modül sıralama algoritmasının dokümantasyonu
+    - İçerik versiyonlama ve geri alma prosedürlerinin hazırlanması
+    - İçerik onay ve yayın akışlarının belirlenmesi
+    - İçerik erişim loglarının merkezi depoda saklanması
+    - İçerik telif ve lisans bilgilerinin yönetimi
+- **Kayıt & Erişim Politikaları** (enrollment, davet/anahtar, iade/iptal kuralları)
+    - Enrollment süreçlerinin otomasyon senaryoları
+    - Davet/anahtar yönetimi için loglama ve raporlama
+    - İade/iptal kurallarının yasal dokümantasyonu
+    - Kayıt ve erişim taleplerinin merkezi yönetimi
+    - Kayıt iptal ve iade süreçlerinin kullanıcıya bildirilmesi
+    - Enrollment denetimlerinin periyodik yapılması
+    - Erişim politikalarının güncel tutulması
+- **Öğrenme Yolları (Learning Path)** (hedef, süre, önerilen rota; prerequisite kontrolü)
+    - Öğrenme yolu hedeflerinin merkezi dashboard’da gösterilmesi
+    - Prerequisite kontrol algoritmasının test edilmesi
+    - Süre ve rota önerilerinin analitik raporlanması
+    - Öğrenme yolu değişikliklerinin loglanması
+    - Kişiselleştirilmiş öğrenme önerilerinin dokümantasyonu
+    - Öğrenme yolu erişim ve tamamlama metriklerinin izlenmesi
+    - Öğrenme yolu güncellemelerinin versiyonlanması
+- **Değerlendirme** (soru tipleri, soru bankası, puanlama; temel anti-abuse kontrolleri)
+    - Soru bankası yönetimi için erişim ve versiyon kontrolü
+    - Puanlama algoritmasının şeffaf dokümantasyonu
+    - Anti-abuse kontrollerinin merkezi log ile takibi
+    - Soru tiplerinin test ve validasyon süreçleri
+    - Değerlendirme sonuçlarının analitik raporlanması
+    - Soru bankası güncellemelerinin versiyonlanması
+    - Değerlendirme süreçlerinin güvenlik denetimi
+- **İlerleme/Analitik Temeli** (tamamlama, yüzde, son aktivite; öğrenci/eğitmen dashboard API)
+    - Tamamlama ve yüzde hesaplamalarının doğrulanması
+    - Son aktivite loglarının merkezi analitik sistemine entegrasyonu
+    - Dashboard API test ve dokümantasyonu
+    - Analitik veri saklama ve erişim politikalarının belirlenmesi
+    - Öğrenci/eğitmen dashboard metriklerinin görselleştirilmesi
+    - İlerleme raporlarının periyodik güncellenmesi
+    - Analitik veri güvenliği ve gizliliğinin sağlanması
+- **Arama/Keşif (Temel)** (kurs adı, etiket, kategori; TR dil kuralları için temel normalize)
+    - Arama algoritmasının TR dil kurallarına uygunluğu için testler
+    - Etiket ve kategori yönetimi için merkezi dashboard
+    - Normalize fonksiyonlarının kod incelemesi
+    - Arama sonuçlarının kalite ve hız metriklerinin izlenmesi
+    - Arama loglarının merkezi depoda saklanması
+    - Arama fonksiyonlarının erişilebilirlik testleri
+    - Arama öneri ve filtreleme algoritmalarının dokümantasyonu
+- **Bildirim (Temel)** (e-posta & in-app; tercih yönetimi başlangıcı)
+    - E-posta ve in-app bildirim şablonlarının merkezi yönetimi
+    - Tercih yönetimi için kullanıcı arayüzü testleri
+    - Bildirim loglarının merkezi depoda saklanması
+    - Bildirim gönderim başarısızlıklarının raporlanması
+    - Bildirim tercih güncellemelerinin loglanması
+    - Bildirim şablonlarının versiyonlanması
+    - Bildirim süreçlerinin güvenlik denetimi
+- **Ön Uç Mimarisi** (route guard, rol bazlı UI, reusable component kitaplığı, Angular Signals)
+    - Route guard ve rol bazlı UI test senaryoları
+    - Reusable component kitaplığının dokümantasyonu
+    - Angular Signals entegrasyonunun kod incelemesi
+    - UI bileşenlerinin erişilebilirlik ve performans testleri
+    - Component kitaplığı güncellemelerinin versiyonlanması
+    - Ön uç mimari kararlarının ADR ile belgelenmesi
+    - UI değişikliklerinin kullanıcıya bildirilmesi
+- **Erişilebilirlik & i18n (Temel)** (kontrast, klavye navigasyonu; TR/EN çeviri altyapısı)
+    - Kontrast ve klavye navigasyonu için erişilebilirlik testleri
+    - TR/EN çeviri dosyalarının merkezi yönetimi
+    - Erişilebilirlik raporlarının periyodik gözden geçirilmesi
+    - i18n dosyalarının versiyonlanması ve güncel tutulması
+    - Erişilebilirlik dokümantasyonunun merkezi depoda tutulması
+    - Kullanıcı geri bildirimlerinin erişilebilirlik iyileştirmelerine entegre edilmesi
+    - Erişilebilirlik ve i18n süreçlerinin eğitimlerde anlatılması
+# Faz 2 – Entegrasyonlar, Öğrenme Standartları ve Oyunlaştırma
+- **Standartlar** (SCORM 1.2/2004, xAPI + LRS, LTI 1.3 & Deep Linking)
+    - SCORM/xAPI/LTI entegrasyon testlerinin hazırlanması
+    - LRS bağlantı ve veri akışının merkezi log ile takibi
+    - Deep Linking senaryolarının dokümantasyonu
+    - Standart uyumluluk raporlarının periyodik güncellenmesi
+    - Entegrasyon API dokümantasyonunun merkezi depoda tutulması
+    - Standartlar ile ilgili eğitim ve bilgilendirme oturumları
+    - Veri güvenliği ve gizliliği denetimlerinin yapılması
+- **Kurumsal Kimlik & Dizin** (SSO: OIDC/SAML; SCIM ile provizyonlama)
+    - OIDC/SAML entegrasyonunun güvenlik testleri
+    - SCIM provizyonlama süreçlerinin merkezi yönetimi
+    - Kimlik ve dizin loglarının periyodik analizi
+    - SSO entegrasyon dokümantasyonunun güncel tutulması
+    - Dizin yönetimi için erişim kontrol politikalarının belirlenmesi
+    - Kimlik yönetimi süreçlerinin denetimi ve raporlanması
+    - SCIM entegrasyonunun test ve validasyon senaryoları
+- **SIS/HRIS/ERP Entegrasyonları** (kullanıcı/rol senkronu, organizasyon/şube/okul hiyerarşisi)
+    - Kullanıcı/rol senkronizasyon algoritmasının test edilmesi
+    - Organizasyon hiyerarşisi diyagramının güncellenmesi
+    - Entegrasyon loglarının merkezi depoda saklanması
+    - Entegrasyon API dokümantasyonunun merkezi yönetimi
+    - Veri akışının güvenlik ve gizlilik denetimi
+    - Entegrasyon süreçlerinin periyodik gözden geçirilmesi
+    - Hiyerarşi değişikliklerinin loglanması ve raporlanması
+- **Medya Hattı** (transcode, altyazı, çoklu dil ses; CDN/DRM, adaptif bitrate)
+    - Transcode ve altyazı süreçlerinin otomasyon senaryoları
+    - CDN/DRM entegrasyonunun güvenlik testleri
+    - Adaptif bitrate algoritmasının dokümantasyonu
+    - Medya dosyalarının erişim ve saklama politikalarının belirlenmesi
+    - Çoklu dil ses ve altyazı yönetimi için merkezi dashboard
+    - Medya hattı süreçlerinin performans ve kalite testleri
+    - Medya erişim loglarının merkezi depoda saklanması
+- **Gelişmiş Arama/Keşif** (eşanlamlı, autocomplete, typo tolerance, etiketleme, taksonomi)
+    - Eşanlamlı ve autocomplete algoritmalarının test edilmesi
+    - Etiketleme ve taksonomi yönetimi için merkezi dashboard
+    - Typo tolerance fonksiyonlarının kod incelemesi
+    - Arama/keşif süreçlerinin erişilebilirlik testleri
+    - Arama öneri ve filtreleme algoritmalarının dokümantasyonu
+    - Arama loglarının merkezi depoda saklanması
+    - Taksonomi güncellemelerinin versiyonlanması
+- **Oyunlaştırma 1.0** (rozet, seviye, görev zincirleri, liderlik tablosu; anti-gaming politikaları)
+    - Rozet ve seviye algoritmalarının dokümantasyonu
+    - Görev zincirleri ve liderlik tablosu test senaryoları
+    - Anti-gaming politikalarının merkezi log ile takibi
+    - Oyunlaştırma süreçlerinin analitik raporlanması
+    - Rozet ve seviye güncellemelerinin versiyonlanması
+    - Oyunlaştırma API dokümantasyonunun merkezi yönetimi
+    - Oyunlaştırma süreçlerinin güvenlik denetimi
+- **Omnikanal Bildirim** (e-posta, push, SMS/WhatsApp; tercih/abonelik merkezi)
+    - E-posta, push ve SMS/WhatsApp entegrasyon testleri
+    - Tercih/abonelik merkezi dashboard’unun kurulumu
+    - Bildirim loglarının merkezi depoda saklanması
+    - Bildirim gönderim başarısızlıklarının raporlanması
+    - Abonelik güncellemelerinin loglanması
+    - Omnikanal bildirim şablonlarının versiyonlanması
+    - Bildirim süreçlerinin güvenlik denetimi
+- **Mobil & Offline** (PWA/native köprüleri, offline önbellek, arka plan senkronu)
+    - PWA/native köprü entegrasyonunun test edilmesi
+    - Offline önbellek algoritmasının dokümantasyonu
+    - Arka plan senkronu için merkezi loglama
+    - Mobil erişim ve offline senkron süreçlerinin analitik raporlanması
+    - Mobil/Offline API dokümantasyonunun merkezi yönetimi
+    - Offline veri saklama ve erişim politikalarının belirlenmesi
+    - Mobil/Offline süreçlerinin performans ve kalite testleri
+- **Çoklu Kiracı & Markalama (Temel)** (tema/renk/logo, alt alan adı)
+    - Tema/renk/logo yönetimi için merkezi dashboard
+    - Alt alan adı yapılandırmasının dokümantasyonu
+    - Kiracı loglarının merkezi depoda saklanması
+    - Çoklu kiracı erişim ve veri bölümlendirme politikalarının belirlenmesi
+    - Tema/marka güncellemelerinin versiyonlanması
+    - Kiracı onboarding ve offboarding süreçlerinin dokümantasyonu
+    - Markalama süreçlerinin analitik raporlanması
+- **Raporlama (Kurumsal Şablonlar)** (kurum/şube/kademe bazlı rapor setleri, dışa aktarım)
+    - Rapor şablonlarının merkezi yönetimi
+    - Dışa aktarım fonksiyonlarının test edilmesi
+    - Rapor loglarının merkezi depoda saklanması
+    - Raporlama API dokümantasyonunun merkezi yönetimi
+    - Rapor şablonlarının versiyonlanması ve güncel tutulması
+    - Raporlama süreçlerinin analitik raporlanması
+    - Rapor erişim ve veri güvenliği denetimlerinin yapılması
+# Faz 3 – Sertleştirme, Uyumluluk ve Yayına Hazırlık
+- **Performans/Yük/Dayanıklılık** (kota, rate limit, kapasite planlama, ölçek testleri)
+    - Kota ve rate limit algoritmalarının test edilmesi
+    - Kapasite planlama raporlarının merkezi depoda tutulması
+    - Ölçek testlerinin periyodik olarak tekrarlanması
+    - Performans metriklerinin izlenmesi ve dashboard’da görselleştirilmesi
+    - Dayanıklılık ve yük test senaryolarının dokümantasyonu
+    - Performans iyileştirme önerilerinin raporlanması
+    - Kapasite artışı ve kaynak yönetimi süreçlerinin belirlenmesi
+- **Güvenlik Sertleştirme & Pen-Test** (OWASP ASVS, suistimal önleme, güvenli kod denetimi)
+    - OWASP ASVS checklist’inin proje board’unda takibi
+    - Pen-test raporlarının merkezi depoda saklanması
+    - Güvenli kod denetimi için otomasyon script’lerinin hazırlanması
+    - Suistimal önleme politikalarının merkezi yönetimi
+    - Güvenlik denetimlerinin periyodik yapılması
+    - Pen-test bulgularının kapatılması için süreç tanımı
+    - Güvenlik eğitimlerinin ekibe düzenli verilmesi
+- **KVKK/GDPR** (aydınlatma, rıza, DSAR süreçleri, saklama & anonimleştirme politikaları)
+    - KVKK/GDPR metinlerinin güncel tutulması
+    - DSAR süreçlerinin merkezi yönetimi
+    - Saklama & anonimleştirme politikalarının dokümantasyonu
+    - KVKK/GDPR uyum denetimlerinin periyodik yapılması
+    - Veri saklama ve anonimleştirme süreçlerinin loglanması
+    - Rıza ve aydınlatma metinlerinin erişilebilirliği
+    - KVKK/GDPR ihlali durumunda olay yönetimi prosedürleri
+- **Erişilebilirlik** (WCAG 2.2 AA denetimi, düzeltmeler ve rapor)
+    - WCAG 2.2 AA denetim raporlarının merkezi depoda tutulması
+    - Düzeltme ve iyileştirme önerilerinin dokümantasyonu
+    - Erişilebilirlik testlerinin periyodik olarak tekrarlanması
+    - Erişilebilirlik raporlarının paydaşlarla paylaşılması
+    - Erişilebilirlik eğitimlerinin ekibe düzenli verilmesi
+    - Erişilebilirlik iyileştirme süreçlerinin loglanması
+    - Erişilebilirlik denetimlerinin dış bağımsız kuruluşlarla yapılması
+- **SLO/SLA & Operasyon** (hata bütçesi, runbook, on-call, uyarı/alert; olay yönetimi)
+    - SLO/SLA metriklerinin merkezi dashboard’da gösterilmesi
+    - Runbook ve on-call prosedürlerinin dokümantasyonu
+    - Olay yönetimi loglarının merkezi depoda saklanması
+    - Hata bütçesi ve olay yönetimi süreçlerinin analitik raporlanması
+    - Uyarı/alert mekanizmalarının test edilmesi
+    - Operasyonel süreçlerin periyodik gözden geçirilmesi
+    - SLO/SLA güncellemelerinin versiyonlanması
+- **Yedeklilik & Felaket Kurtarma** (RPO/RTO hedefleri, yedekleme, DR senaryoları)
+    - RPO/RTO hedeflerinin merkezi yönetimi
+    - Yedekleme ve DR senaryolarının test edilmesi
+    - Felaket kurtarma prosedürlerinin dokümantasyonu
+    - Yedekleme politikalarının periyodik gözden geçirilmesi
+    - Felaket kurtarma tatbikatlarının düzenli yapılması
+    - Yedekleme ve kurtarma loglarının merkezi depoda saklanması
+    - DR planlarının paydaşlarla paylaşılması
+- **Sürümleme/Dağıtım** (canary/blue-green, rollback; versiyon stratejileri)
+    - Canary/blue-green dağıtım senaryolarının test edilmesi
+    - Rollback prosedürlerinin merkezi yönetimi
+    - Versiyon stratejilerinin dokümantasyonu
+    - Dağıtım sonrası doğrulama ve rollback testleri
+    - Sürümleme süreçlerinin analitik raporlanması
+    - Versiyon güncellemelerinin loglanması
+    - Sürümleme ve dağıtım eğitimlerinin ekibe verilmesi
+- **Yayın Hazırlığı** (launch checklist, eğitim/doküman, değişiklik iletişimi)
+    - Launch checklist’in merkezi depoda tutulması
+    - Eğitim ve dokümanların güncel tutulması
+    - Değişiklik iletişimi için merkezi loglama
+    - Yayın öncesi son kontrollerin dokümantasyonu
+    - Yayın sonrası geri bildirim süreçlerinin belirlenmesi
+    - Yayın hazırlığı süreçlerinin analitik raporlanması
+    - Yayın iletişimi ve eğitimlerinin paydaşlara iletilmesi
+# Faz 4 – Fark Yaratan Yetenekler (Rekabet Üstü)
+- **Adaptif Öğrenme Motoru** (öğrenci performansına göre içerik/adım önerisi; mastery-based)
+    - Performans verilerinin merkezi analitik sistemine entegrasyonu
+    - İçerik/adım öneri algoritmasının test edilmesi
+    - Mastery-based öğrenme raporlarının dokümantasyonu
+    - Öğrenme motoru güncellemelerinin versiyonlanması
+    - Adaptif öneri süreçlerinin analitik raporlanması
+    - Öğrenme motoru API dokümantasyonunun merkezi yönetimi
+    - Öğrenme motoru süreçlerinin güvenlik ve gizlilik denetimi
+- **AI Destekli Asistan** (özetleme, açıklama, soru üretimi, ödev geri bildirimi; öğretmen asistanı)
+    - AI asistan fonksiyonlarının kod incelemesi ve test senaryoları
+    - Özetleme ve açıklama algoritmalarının merkezi yönetimi
+    - Soru üretimi ve ödev geri bildirimi raporlarının dokümantasyonu
+    - AI asistan güncellemelerinin versiyonlanması
+    - AI süreçlerinin etik ve güvenlik denetimi
+    - AI asistan eğitimlerinin ekibe verilmesi
+    - AI fonksiyonlarının analitik raporlanması
+- **Kazanım/Öğrenim Hedefi Haritalaması** (müfredat/taksonomi eşleme; öğrenme açığı tespiti)
+    - Müfredat/taksonomi eşleme algoritmasının test edilmesi
+    - Öğrenme açığı tespit raporlarının merkezi depoda tutulması
+    - Haritalama fonksiyonlarının kod incelemesi
+    - Hedef haritalama güncellemelerinin versiyonlanması
+    - Öğrenim açığı süreçlerinin analitik raporlanması
+    - Haritalama API dokümantasyonunun merkezi yönetimi
+    - Haritalama süreçlerinin güvenlik ve gizlilik denetimi
+- **Gelişmiş Dashboard & İçgörü** (riskli öğrenci erken uyarı, koçluk önerileri, kohort analizi)
+    - Riskli öğrenci erken uyarı algoritmasının test edilmesi
+    - Koçluk önerileri ve kohort analizi raporlarının merkezi yönetimi
+    - Dashboard fonksiyonlarının kod incelemesi
+    - Dashboard güncellemelerinin versiyonlanması
+    - İçgörü süreçlerinin analitik raporlanması
+    - Dashboard API dokümantasyonunun merkezi yönetimi
+    - Dashboard süreçlerinin güvenlik ve gizlilik denetimi
+- **İçerik Authoring Studio** (etkileşimli video/HTML5, quiz içi etkileşim, sürümleme)
+    - Etkileşimli video/HTML5 fonksiyonlarının test edilmesi
+    - Quiz içi etkileşim algoritmasının dokümantasyonu
+    - Sürümleme fonksiyonlarının merkezi yönetimi
+    - Authoring studio güncellemelerinin versiyonlanması
+    - İçerik authoring süreçlerinin analitik raporlanması
+    - Authoring API dokümantasyonunun merkezi yönetimi
+    - Authoring süreçlerinin güvenlik ve erişilebilirlik denetimi
+- **Sertifika/Doğrulama** (dinamik şablon, QR doğrulama; rozet/sertifika ihracı)
+    - Dinamik şablon ve QR doğrulama algoritmasının test edilmesi
+    - Rozet/sertifika ihracı süreçlerinin merkezi yönetimi
+    - Doğrulama loglarının merkezi depoda saklanması
+    - Sertifika güncellemelerinin versiyonlanması
+    - Doğrulama süreçlerinin analitik raporlanması
+    - Sertifika API dokümantasyonunun merkezi yönetimi
+    - Sertifika süreçlerinin güvenlik ve gizlilik denetimi
+- **Sosyal & İşbirliği 2.0** (mentor-mentee, akran değerlendirme, grup projeleri, canlı odalar)
+    - Mentor-mentee eşleşme algoritmasının test edilmesi
+    - Akran değerlendirme ve grup proje raporlarının merkezi yönetimi
+    - Canlı oda fonksiyonlarının kod incelemesi
+    - Sosyal süreçlerin analitik raporlanması
+    - İşbirliği API dokümantasyonunun merkezi yönetimi
+    - Sosyal ve işbirliği süreçlerinin güvenlik ve gizlilik denetimi
+    - Mentor-mentee ve grup proje güncellemelerinin versiyonlanması
+- **Uzaktan Sınav & Proctoring** (tarayıcı kilidi, davranış işaretleri, KVKK-uyumlu kayıt politikaları)
+    - Tarayıcı kilidi ve davranış işaretleri algoritmasının test edilmesi
+    - KVKK-uyumlu kayıt politikalarının merkezi yönetimi
+    - Proctoring loglarının merkezi depoda saklanması
+    - Uzaktan sınav süreçlerinin analitik raporlanması
+    - Proctoring API dokümantasyonunun merkezi yönetimi
+    - Proctoring süreçlerinin güvenlik ve gizlilik denetimi
+    - Sınav ve kayıt politikası güncellemelerinin versiyonlanması
+- **STEM/Simülasyon/AR-VR** (laboratuvar simülasyonları, 3B içerikler; performans ve erişilebilirlik optimizasyonu)
+    - Laboratuvar simülasyonları ve 3B içerik fonksiyonlarının test edilmesi
+    - Performans ve erişilebilirlik optimizasyon raporlarının merkezi yönetimi
+    - AR-VR fonksiyonlarının kod incelemesi
+    - STEM/Simülasyon güncellemelerinin versiyonlanması
+    - AR-VR süreçlerinin analitik raporlanması
+    - STEM/AR-VR API dokümantasyonunun merkezi yönetimi
+    - STEM/AR-VR süreçlerinin güvenlik ve erişilebilirlik denetimi
+# Faz 5 – Ticarileşme ve Kurumsal Paketler
+- **Fiyatlandırma/Abonelik/Ödeme** (tek seferlik, dönemsel, kurumsal lisans; kupon/indirim)
+    - Fiyatlandırma ve abonelik algoritmalarının test edilmesi
+    - Kurumsal lisans ve kupon/indirim süreçlerinin merkezi yönetimi
+    - Ödeme loglarının merkezi depoda saklanması
+    - Fiyatlandırma ve ödeme API dokümantasyonunun merkezi yönetimi
+    - Abonelik ve ödeme süreçlerinin analitik raporlanması
+    - Fiyatlandırma güncellemelerinin versiyonlanması
+    - Ödeme süreçlerinin güvenlik ve yasal denetimi
+- **Faturalama & Vergi** (e-fatura/e-arşiv entegrasyon opsiyonları, B2B sözleşme akışı)
+    - E-fatura/e-arşiv entegrasyon testlerinin hazırlanması
+    - B2B sözleşme akışı prosedürlerinin dokümantasyonu
+    - Faturalama loglarının merkezi depoda saklanması
+    - Faturalama ve vergi API dokümantasyonunun merkezi yönetimi
+    - Fatura ve vergi süreçlerinin analitik raporlanması
+    - Faturalama güncellemelerinin versiyonlanması
+    - Vergi süreçlerinin yasal denetimi ve raporlanması
+- **Tenant Yönetimi** (kota, sözleşme koşulları, veri bölümlendirme; kurumsal roller)
+    - Kota ve sözleşme koşullarının merkezi yönetimi
+    - Veri bölümlendirme algoritmasının test edilmesi
+    - Kurumsal rol loglarının merkezi depoda saklanması
+    - Tenant yönetimi API dokümantasyonunun merkezi yönetimi
+    - Tenant onboarding ve offboarding süreçlerinin dokümantasyonu
+    - Tenant güncellemelerinin versiyonlanması
+    - Tenant süreçlerinin güvenlik ve yasal denetimi
+- **White-Label & Markalama** (tema paketleri, domain, mağaza/portal özelleştirme)
+    - Tema paketleri ve domain yapılandırmasının dokümantasyonu
+    - Mağaza/portal özelleştirme fonksiyonlarının test edilmesi
+    - Markalama loglarının merkezi depoda saklanması
+    - White-label ve markalama API dokümantasyonunun merkezi yönetimi
+    - Tema ve marka güncellemelerinin versiyonlanması
+    - Markalama süreçlerinin analitik raporlanması
+    - White-label süreçlerinin yasal denetimi
+- **Veri Dışa Aktarım & Entegrasyon** (rapor API, webhook, SFTP; arşiv politikaları)
+    - Rapor API, webhook ve SFTP entegrasyon testleri
+    - Arşiv politikalarının merkezi yönetimi
+    - Veri dışa aktarım loglarının merkezi depoda saklanması
+    - Veri dışa aktarım ve entegrasyon API dokümantasyonunun merkezi yönetimi
+    - Arşiv ve entegrasyon süreçlerinin analitik raporlanması
+    - Veri dışa aktarım güncellemelerinin versiyonlanması
+    - Entegrasyon süreçlerinin güvenlik ve yasal denetimi
+- **Müşteri Başarısı & Destek** (SLA planları, eğitim/onboarding, NPS/CSAT)
+    - SLA planlarının merkezi dashboard’da gösterilmesi
+    - Eğitim/onboarding süreçlerinin dokümantasyonu
+    - NPS/CSAT raporlarının merkezi depoda saklanması
+    - Müşteri başarısı ve destek API dokümantasyonunun merkezi yönetimi
+    - Eğitim ve onboarding süreçlerinin analitik raporlanması
+    - SLA güncellemelerinin versiyonlanması
+    - Destek süreçlerinin kalite ve memnuniyet denetimi
+- **RFP/Uyumluluk Cevap Setleri** (güvenlik anketleri, denetim dokümanları, referans mimari)
+    - Güvenlik anketleri ve denetim dokümanlarının merkezi yönetimi
+    - Referans mimari diyagramlarının güncellenmesi
+    - Uyumluluk loglarının merkezi depoda saklanması
+    - RFP ve uyumluluk API dokümantasyonunun merkezi yönetimi
+    - Uyumluluk süreçlerinin analitik raporlanması
+    - RFP güncellemelerinin versiyonlanması
+    - Uyumluluk süreçlerinin yasal denetimi
+# Faz 6 – Büyüme, Ekosistem ve Pazar Yeri
+- **İçerik Pazarı/Marketplace** (yayıncı/partner onboarding, gelir paylaşımı, kalite yönergeleri)
+    - Yayıncı/partner onboarding süreçlerinin dokümantasyonu
+    - Gelir paylaşımı algoritmasının test edilmesi
+    - Kalite yönergelerinin merkezi yönetimi
+    - Marketplace API dokümantasyonunun merkezi yönetimi
+    - Yayıncı onboarding ve kalite süreçlerinin analitik raporlanması
+    - Gelir paylaşımı güncellemelerinin versiyonlanması
+    - Marketplace süreçlerinin yasal denetimi
+- **Partner API/SDK** (eklenti/uzantı modeli, geliştirici portalı, anahtar döngüsü)
+    - Eklenti/uzantı modeli fonksiyonlarının kod incelemesi
+    - Geliştirici portalı dokümantasyonunun güncellenmesi
+    - Anahtar döngüsü algoritmasının test edilmesi
+    - Partner API/SDK güncellemelerinin versiyonlanması
+    - API/SDK süreçlerinin analitik raporlanması
+    - Partner API/SDK süreçlerinin güvenlik ve yasal denetimi
+    - Geliştirici portalı süreçlerinin kalite denetimi
+- **Topluluk & Eğitmen Ekosistemi** (eğitmen kalite programı, rozetler, içerik denetimi)
+    - Eğitmen kalite programı raporlarının merkezi yönetimi
+    - Rozet ve içerik denetimi algoritmalarının test edilmesi
+    - Topluluk loglarının merkezi depoda saklanması
+    - Topluluk ve eğitmen ekosistemi API dokümantasyonunun merkezi yönetimi
+    - Eğitmen kalite süreçlerinin analitik raporlanması
+    - Rozet ve içerik denetimi güncellemelerinin versiyonlanması
+    - Topluluk süreçlerinin kalite ve memnuniyet denetimi
+- **Deney/AB Test Çerçevesi** (north-star metrikleri, otomatik deney, feature flag entegrasyonu)
+    - North-star metriklerinin merkezi dashboard’da gösterilmesi
+    - Otomatik deney ve feature flag entegrasyon testleri
+    - Deney loglarının merkezi depoda saklanması
+    - Deney/AB test API dokümantasyonunun merkezi yönetimi
+    - Deney süreçlerinin analitik raporlanması
+    - AB test güncellemelerinin versiyonlanması
+    - Deney süreçlerinin kalite ve güvenlik denetimi
+- **Büyüme Motoru** (kampanya/öneri otomasyonları, referral/kurumsal davet mekanizmaları)
+    - Kampanya ve öneri otomasyon algoritmalarının test edilmesi
+    - Referral/kurumsal davet mekanizmalarının dokümantasyonu
+    - Büyüme loglarının merkezi depoda saklanması
+    - Büyüme motoru API dokümantasyonunun merkezi yönetimi
+    - Kampanya ve büyüme süreçlerinin analitik raporlanması
+    - Büyüme motoru güncellemelerinin versiyonlanması
+    - Büyüme süreçlerinin kalite ve güvenlik denetimi
+- **Bölgesel Yayılım** (çok dilli/çok para birimli, yerel uyum; TR odaklı KVKK sürdürümü)
+    - Çok dilli/para birimli yapılandırmanın merkezi yönetimi
+    - Yerel uyum ve TR odaklı KVKK süreçlerinin dokümantasyonu
+    - Bölgesel yayılım loglarının merkezi depoda saklanması
+    - Bölgesel yayılım API dokümantasyonunun merkezi yönetimi
+    - Yayılım süreçlerinin analitik raporlanması
+    - Bölgesel güncellemelerin versiyonlanması
+    - Yerel uyum süreçlerinin yasal denetimi
+- **Yol Haritası Yönetişimi** (OKR/portföy yönetimi, steering komitesi, paydaş ritüelleri)
+    - OKR/portföy yönetimi raporlarının merkezi dashboard’da gösterilmesi
+    - Steering komitesi ve paydaş ritüellerinin dokümantasyonu
+    - Yol haritası loglarının merkezi depoda saklanması
+    - Yol haritası ve yönetişim API dokümantasyonunun merkezi yönetimi
+    - OKR ve portföy süreçlerinin analitik raporlanması
+    - Yol haritası güncellemelerinin versiyonlanması
+    - Yönetişim süreçlerinin kalite ve paydaş memnuniyeti denetimi

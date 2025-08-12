@@ -1,0 +1,21 @@
+name: Hata Raporu
+description: Bir hatayı bildirin
+labels: ["bug"]
+body:
+  - type: input
+    id: env
+    attributes:
+      label: Ortam
+      description: Tarayıcı/OS/Versiyon
+  - type: textarea
+    id: steps
+    attributes:
+      label: Yeniden Üretme Adımları
+  - type: textarea
+    id: expected
+    attributes:
+      label: Beklenen Davranış
+  - type: textarea
+    id: actual
+    attributes:
+      label: Gerçekleşen Davranış
