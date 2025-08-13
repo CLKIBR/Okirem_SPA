@@ -1,3 +1,112 @@
+# Ortam Bazlı Pipeline Varyasyonları
+
+Proje CI/CD pipeline'ı, farklı ortamlar (development, staging, production) için aşağıdaki varyasyonlara sahiptir:
+
+## Development (Geliştirme)
+- Her commit/push sonrası otomatik olarak build, lint, test ve coverage adımları çalışır.
+- Deploy işlemi yapılmaz, sadece kalite ve entegrasyon kontrolleri uygulanır.
+
+## Staging (Ön Prod)
+- Ana branch'e (main) veya belirli bir branch'e merge sonrası pipeline tetiklenir.
+- Build, lint, test, coverage ve güvenlik taramaları zorunludur.
+- Başarılı ise staging ortamına otomatik deploy yapılır.
+- Gerekirse manuel onay adımı eklenebilir.
+
+## Production (Canlı)
+- Sadece onaylanmış ve testleri geçen kodlar production pipeline'ına alınır.
+- Build, lint, test, coverage, güvenlik taramaları ve release/tag adımları zorunludur.
+- Başarılı ise production ortamına otomatik veya manuel onay ile deploy yapılır.
+- Rollback ve notification mekanizmaları aktif olarak uygulanır.
+
+> Her ortam için pipeline adımları ve kuralları düzenli olarak gözden geçirilir ve güncellenir.
+# Fail-Fast ve Notification Mekanizmaları
+
+## Fail-Fast
+- CI/CD pipeline'ında herhangi bir adım (lint, test, build, deploy, security scan vb.) başarısız olursa süreç anında durdurulur (fail-fast).
+- Başarısız adım sonrası kalan adımlar çalıştırılmaz, hata hızlıca tespit edilir ve müdahale edilir.
+
+## Notification (Bildirim)
+- Pipeline başarısız olduğunda veya kritik bir hata oluştuğunda ekip üyelerine otomatik bildirim (örn. e-posta, Slack, Teams) gönderilir.
+- Bildirimler, hızlı aksiyon alınmasını ve şeffaflığı sağlar.
+- Bildirim entegrasyonları CI/CD platformunun native özellikleri veya ek aksiyonlar ile sağlanır.
+
+> Fail-fast ve notification mekanizmaları, hızlı geri bildirim ve yüksek yazılım kalitesi için zorunludur.
+# Pipeline Adımlarının Loglanması ve İzlenebilirliği
+
+Tüm CI/CD pipeline adımları detaylı şekilde loglanır ve izlenebilirlik sağlanır:
+
+- Her adımda (build, test, lint, deploy, security scan vb.) çıktı ve hata logları tutulur.
+- Pipeline logları CI/CD platformunda (örn. GitHub Actions, GitLab CI) merkezi olarak saklanır ve geçmişe dönük erişim mümkündür.
+- Hatalı adımlar ve başarısız pipeline çalışmaları ekip tarafından düzenli olarak gözden geçirilir.
+- Kritik hatalar ve uyarılar için otomatik bildirim (örn. e-posta, Slack) entegrasyonu önerilir.
+
+> Loglama ve izlenebilirlik, hata ayıklama, kalite takibi ve denetim süreçleri için zorunludur.
+# CI/CD Pipeline'da Güvenlik Taramaları
+
+Tüm kod değişikliklerinde ve release süreçlerinde CI/CD pipeline'ında otomatik güvenlik taramaları zorunludur:
+
+- `npm audit` ile bağımlılık güvenlik açıkları kontrol edilir.
+- Gerekirse ek olarak Snyk, SonarQube veya benzeri araçlarla kod güvenlik analizi yapılır.
+- Güvenlik taramasında kritik açık tespit edilirse pipeline otomatik olarak durur ve deploy işlemi engellenir.
+- Güvenlik raporları ekip içinde paylaşılır ve gerekli aksiyonlar alınır.
+
+> Güvenlik taramaları, kurumsal standartların ve yasal gerekliliklerin bir parçasıdır.
+# Otomatik Build ve Deploy Rollback Senaryoları
+
+Otomatik build ve deploy süreçlerinde hata veya istenmeyen durumlarda hızlı rollback için aşağıdaki senaryolar uygulanır:
+
+## 1. Build/Deploy Hatası Sonrası Otomatik Rollback
+- CI/CD pipeline'da build veya deploy adımı başarısız olursa, pipeline otomatik olarak durur ve mevcut production sürümünde değişiklik yapılmaz.
+- Deploy edilen ortamda hata tespit edilirse, otomatik olarak bir önceki başarılı sürüme (örn. önceki git tag veya release) geri dönülür.
+- Rollback işlemi sonrası ekip bilgilendirilir ve hata analizi başlatılır.
+
+## 2. Manuel Rollback
+- Kritik hata veya acil durumda, ilgili git etiketi (örn. `v1.2.2`) ile manuel olarak geri dönülür:
+	```bash
+	git checkout v1.2.2
+	# veya
+git revert <hatalı-commit>
+	# ardından yeni bir patch release ve deploy yapılır
+	```
+- Rollback işlemi sonrası yeni bir düzeltme sürümü oluşturulmalı ve tekrar deploy edilmelidir.
+
+## 3. Rollback Prosedürleri
+- Rollback işlemleri sadece yetkili ekip üyeleri tarafından yapılır.
+- Tüm rollback ve düzeltme işlemleri ekip içinde duyurulur ve dokümante edilir.
+- Otomasyon scriptleri ve pipeline adımları düzenli olarak test edilmelidir.
+
+> Rollback senaryoları, kesintisiz hizmet ve hızlı müdahale için zorunludur.
+# Test ve Coverage Raporlarının Merkezi Saklanması
+
+Tüm test sonuçları ve coverage (kapsam) raporları, merkezi olarak `docs/coverage/` klasöründe saklanır ve güncellenir.
+
+- Her test çalıştırmasından sonra coverage raporu bu klasöre kopyalanır.
+- Ekip üyeleri ve yöneticiler, geçmiş test ve kapsam sonuçlarını buradan takip edebilir.
+- CI/CD pipeline ile coverage raporlarının otomatik güncellenmesi önerilir.
+
+> Raporların merkezi saklanması, kalite takibi ve denetim süreçleri için zorunludur.
+# CI/CD Pipeline Şeması ve Onay Akışları
+
+## Pipeline Şeması
+```mermaid
+flowchart TD
+	A[Geliştirici Commit/PR] --> B[Pre-commit Lint/Format]
+	B --> C[Pull Request Açılır]
+	C --> D[Otomatik Testler (CI)]
+	D --> E[Code Review & Onay]
+	E --> F[Main Branch'e Merge]
+	F --> G[Release/Tag Otomasyonu]
+	G --> H[CHANGELOG.md Güncelleme]
+	H --> I[Deploy (Opsiyonel)]
+```
+
+## Onay Akışları
+- Her pull request (PR) için en az bir ekip üyesi tarafından code review ve onay gereklidir.
+- Otomatik testler (lint, unit test, stylelint) geçmeden merge işlemi yapılamaz.
+- Sürüm ve release işlemleri otomatik olarak pipeline sonunda tetiklenir.
+- Kritik değişikliklerde ek onay veya manuel kontrol gerekebilir (örn. production deploy).
+
+> Pipeline ve onay akışları, kod kalitesi ve güvenliğini sağlamak için zorunludur. Süreçler düzenli olarak gözden geçirilir ve güncellenir.
 # Geriye Dönük Sürüm İnceleme ve Rollback Prosedürleri
 
 ## Sürüm İnceleme
