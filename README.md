@@ -1,3 +1,78 @@
+# Katman Sınırları ve Sorumlulukları
+
+Proje kod tabanında katmanlar ve sorumlulukları aşağıdaki gibi netleştirilmiştir:
+
+| Katman         | Klasör/Yol                | Sorumluluk |
+|----------------|---------------------------|------------|
+| UI/Pages       | `src/app/pages`           | Kullanıcıya gösterilen arayüz ve sayfa bileşenleri |
+| Features       | `src/app/features`        | İşlevsel modüller, domain mantığı |
+| Shared         | `src/app/shared`          | Ortak bileşenler, pipe'lar, directive'ler, yardımcılar |
+| Shared/DTO     | `src/app/shared/dto`      | Katmanlar arası ve dış API veri transfer nesneleri |
+| Shared/Mappers | `src/app/shared/mappers`  | DTO <-> Domain model dönüşüm fonksiyonları |
+| Core           | `src/app/core`            | Uygulama genel servisleri, guard'lar, interceptor'lar |
+| Infrastructure | (gerekirse)               | Dış bağımlılıklar, API, veri erişim katmanı |
+
+Her katmanın sorumluluğu ve sınırı kodda ve dokümantasyonda açıkça belirtilmiştir. Katmanlar arası bağımlılıklar yukarıdaki diyagram ve açıklamalara uygun olmalıdır.
+# DTO ve Mapper Politikaları
+
+## Politika
+- Tüm dış API/servis entegrasyonlarında ve katmanlar arası veri iletiminde DTO (Data Transfer Object) kullanımı zorunludur.
+- Domain modeli ile dış veri formatı arasında dönüşüm için ayrı Mapper fonksiyonları veya sınıfları tanımlanır.
+- Mapper fonksiyonları, veri doğrulama ve tip güvenliğini garanti altına alır.
+- DTO ve Mapper'lar `shared/dto` ve `shared/mappers` klasörlerinde tutulur.
+
+## TypeScript Kod Örneği
+```typescript
+// shared/dto/user.dto.ts
+export interface UserDto {
+	id: string;
+	name: string;
+	email: string;
+}
+
+// domain model
+export interface User {
+	id: string;
+	fullName: string;
+	email: string;
+}
+
+// shared/mappers/user.mapper.ts
+export function mapUserDtoToUser(dto: UserDto): User {
+	return {
+		id: dto.id,
+		fullName: dto.name,
+		email: dto.email,
+	};
+}
+
+export function mapUserToUserDto(user: User): UserDto {
+	return {
+		id: user.id,
+		name: user.fullName,
+		email: user.email,
+	};
+}
+```
+
+> DTO ve Mapper kullanımı, kodun sürdürülebilirliği, tip güvenliği ve dış sistemlerle entegrasyonun sağlıklı olması için zorunludur.
+# Katmanlar Arası Bağımlılık Diyagramı
+
+```mermaid
+flowchart TD
+	A[UI / Pages] --> B[Features]
+	B --> C[Shared]
+	B --> D[Core]
+	C --> D
+	D --> E[3rd Party / API / Infrastructure]
+```
+
+**Açıklama:**
+- UI/Pages katmanı, uygulamanın kullanıcıya gösterilen arayüzünü ve sayfa bileşenlerini içerir.
+- Features katmanı, işlevsel modülleri ve domain mantığını barındırır.
+- Shared katmanı, ortak bileşenler, pipe'lar ve yardımcıları içerir.
+- Core katmanı, uygulama genelinde kullanılan servisler, guard'lar ve altyapı kodlarını içerir.
+- En alt katmanda ise dış bağımlılıklar, API ve altyapı servisleri yer alır.
 # Ortam Bazlı Pipeline Varyasyonları
 
 Proje CI/CD pipeline'ı, farklı ortamlar (development, staging, production) için aşağıdaki varyasyonlara sahiptir:

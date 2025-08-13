@@ -2,22 +2,22 @@
   "name": "okirem-spa",
   "version": "0.0.0",
   "scripts": {
-  "ng": "ng",
-  "start": "ng serve",
-  "build": "ng build",
-  "watch": "ng build --watch --configuration development",
-  "test": "ng test",
-  "lint": "eslint \"src/**/*.{ts,js}\" --fix",
-  "format": "prettier --write \"src/**/*.{ts,js,scss,css,html}\"",
-  "stylelint": "stylelint \"src/**/*.{css,scss}\" --fix",
-  "release": "standard-version",
-  "changelog": "standard-version --dry-run --skip.commit --skip.tag",
-  "prepare": "husky install",
-  "ai:context": "node scripts/ai/docgen.mjs",
-  "git:issues": "node scripts/ai/create-issues.mjs",
-  "git:pr": "node scripts/ai/create-pr.mjs",
-  "git:start": "node scripts/ai/log-day-plan.mjs start",
-  "git:end": "node scripts/ai/log-day-plan.mjs end"
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test",
+    "lint": "eslint \"src/**/*.{ts,js}\" --fix",
+    "format": "prettier --write \"src/**/*.{ts,js,scss,css,html}\"",
+    "stylelint": "stylelint \"src/**/*.{css,scss}\" --fix",
+    "release": "standard-version",
+    "changelog": "standard-version --dry-run --skip.commit --skip.tag",
+    "prepare": "husky install",
+    "ai:context": "node scripts/ai/docgen.mjs",
+    "git:issues": "node scripts/ai/create-issues.mjs",
+    "git:pr": "node scripts/ai/create-pr.mjs",
+    "git:start": "node scripts/ai/log-day-plan.mjs start",
+    "git:end": "node scripts/ai/log-day-plan.mjs end"
   },
   "lint-staged": {
     "*.ts": [
@@ -67,6 +67,8 @@
     "@angular/cli": "^20.1.5",
     "@angular/compiler-cli": "^20.1.0",
     "@types/jasmine": "~5.1.0",
+    "@typescript-eslint/eslint-plugin": "^8.39.1",
+    "@typescript-eslint/parser": "^8.39.1",
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-prettier": "^5.5.4",
@@ -83,6 +85,7 @@
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "^34.0.0",
-    "typescript": "~5.8.2"
+    "typescript": "~5.8.2",
+    "typescript-eslint": "^8.39.1"
   }
 }
