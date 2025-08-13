@@ -1,3 +1,54 @@
+# Geriye Dönük Sürüm İnceleme ve Rollback Prosedürleri
+
+## Sürüm İnceleme
+- Tüm geçmiş sürümler ve değişiklikler `CHANGELOG.md` dosyasından takip edilir.
+- Belirli bir sürümdeki değişiklikler için ilgili git etiketi (örn. `v1.2.3`) ve changelog bölümü incelenir.
+
+## Rollback (Geri Alma)
+- Hatalı veya istenmeyen bir sürüm tespit edildiğinde aşağıdaki adımlar izlenir:
+	1. Geri dönülecek sürüm etiketi belirlenir (örn. `v1.2.2`).
+	2. `git checkout v1.2.2` ile ilgili sürüme geçilir.
+	3. Gerekirse yeni bir düzeltme (patch) branch'i açılır ve sorun giderilir.
+	4. Düzeltme sonrası yeni bir sürüm (`patch release`) oluşturulur ve tekrar etiketlenir.
+	5. Tüm rollback ve düzeltme işlemleri ekip içinde duyurulur ve dokümante edilir.
+
+> Rollback işlemleri, veri kaybı ve uyumsuzluk riskine karşı dikkatle ve sorumlu kişiler tarafından yürütülmelidir.
+# Sürüm Notlarının Merkezi Depoda Tutulması
+
+Tüm sürüm notları ve değişiklik geçmişi, projenin kök dizinindeki `CHANGELOG.md` dosyasında merkezi olarak tutulur ve güncellenir.
+
+- Otomatik release/tag işlemleri ve manuel güncellemeler bu dosyada toplanır.
+- Ekip üyeleri ve dış kullanıcılar, geçmiş tüm değişiklikleri bu dosyadan takip edebilir.
+# Sürüm Etiketleme ve Geri Alma Prosedürleri
+
+## Sürüm Etiketleme (Tagging)
+- Her yeni sürüm, `npm run release` komutu ile oluşturulur ve otomatik olarak git etiketi (tag) eklenir.
+- Etiketler semantik versiyonlama (örn. v1.2.3) formatında olmalıdır.
+- Sürüm notları ve değişiklikler otomatik olarak `CHANGELOG.md` dosyasına yazılır.
+
+## Sürüm Geri Alma (Rollback)
+- Hatalı bir sürüm yayınlandığında, ilgili git etiketi ve commit'e dönülerek (örn. `git checkout v1.2.2`) eski sürüm geri alınabilir.
+- Geri alma işlemi sonrası yeni bir düzeltme sürümü (`patch release`) oluşturulmalı ve tekrar etiketlenmelidir.
+- Geri alma ve düzeltme işlemleri ekip içinde duyurulmalı ve dokümante edilmelidir.
+
+> Sürüm yönetimi ve geri alma işlemleri proje yöneticisi veya belirlenen sorumlu tarafından yürütülmelidir.
+# Otomatik CHANGELOG ve Sürüm Yönetimi
+
+Proje sürümleri ve değişiklik geçmişi otomatik olarak [standard-version](https://github.com/conventional-changelog/standard-version) ile yönetilir.
+
+- Yeni bir sürüm ve changelog oluşturmak için:
+
+```bash
+npm run release
+```
+
+- Sadece güncel changelog'u görmek için:
+
+```bash
+npm run changelog
+```
+
+Tüm anlamlı değişiklikler otomatik olarak `CHANGELOG.md` dosyasına yazılır. Commit mesajlarında konvansiyonel commit kurallarına uyulması zorunludur.
 # Kod Kalitesi Metriklerinin Periyodik Raporlanması
 
 Kod kalitesinin sürdürülebilirliği için aşağıdaki metrikler periyodik olarak (ör. her sprint sonunda) raporlanır:

@@ -10,6 +10,8 @@
   "lint": "eslint \"src/**/*.{ts,js}\" --fix",
   "format": "prettier --write \"src/**/*.{ts,js,scss,css,html}\"",
   "stylelint": "stylelint \"src/**/*.{css,scss}\" --fix",
+  "release": "standard-version",
+  "changelog": "standard-version --dry-run --skip.commit --skip.tag",
   "prepare": "husky install",
   "ai:context": "node scripts/ai/docgen.mjs",
   "git:issues": "node scripts/ai/create-issues.mjs",
@@ -18,11 +20,25 @@
   "git:end": "node scripts/ai/log-day-plan.mjs end"
   },
   "lint-staged": {
-    "*.ts": ["eslint --fix", "prettier --write"],
-    "*.js": ["eslint --fix", "prettier --write"],
-    "*.scss": ["stylelint --fix", "prettier --write"],
-    "*.css": ["stylelint --fix", "prettier --write"],
-    "*.html": ["prettier --write"]
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.js": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.scss": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.css": [
+      "stylelint --fix",
+      "prettier --write"
+    ],
+    "*.html": [
+      "prettier --write"
+    ]
   },
   "prettier": {
     "overrides": [
@@ -63,6 +79,7 @@
     "karma-jasmine-html-reporter": "~2.1.0",
     "lint-staged": "^16.1.5",
     "prettier": "^3.6.2",
+    "standard-version": "^9.5.0",
     "stylelint": "^14.16.1",
     "stylelint-config-prettier": "^9.0.5",
     "stylelint-config-standard": "^34.0.0",
