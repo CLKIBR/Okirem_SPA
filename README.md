@@ -1,3 +1,10 @@
+# Kod İnceleme (Code Review) Politikası
+
+Tüm ekip üyeleri, kod inceleme süreçlerinde aşağıdaki checklist'i kullanmakla yükümlüdür:
+
+- [docs/CODE_REVIEW_CHECKLIST.md](docs/CODE_REVIEW_CHECKLIST.md)
+
+Kod inceleme checklist'i, kod kalitesini ve sürdürülebilirliği sağlamak için zorunludur. Checklist düzenli olarak gözden geçirilir ve proje ihtiyaçlarına göre güncellenir.
 # OkiremSPA
 
 This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.1.5.
