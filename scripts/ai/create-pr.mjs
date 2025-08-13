@@ -7,8 +7,8 @@ import fetch from 'node-fetch';
 import 'dotenv/config';
 import readline from 'readline';
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO = process.env.GITHUB_REPO;
+const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
+const REPO = process.env.REPO_GITHUB;
 const PLAN_PATH = path.resolve('docs/PROJECT_PLAN_DETAY.md');
 const FAZ_PATH = path.resolve('docs/PRPJECT_FAZ.MD');
 
@@ -82,7 +82,7 @@ async function createPR({ head, base, title, body }) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${GITHUB_TOKEN}`,
+  'Authorization': `Bearer ${GITHUB_TOKEN}`,
       'Accept': 'application/vnd.github+json',
       'Content-Type': 'application/json'
     },
@@ -97,7 +97,7 @@ async function createPR({ head, base, title, body }) {
 
 async function main() {
   if (!GITHUB_TOKEN && !TEST_MODE) {
-    console.error('GITHUB_TOKEN environment variable is not set.');
+    console.error('TOKEN_GITHUB environment variable is not set.');
     process.exit(1);
   }
   const selectedTitle = await askTitle();

@@ -9,12 +9,12 @@ dotenv.config();
 
 const TEST_MODE = false; // Gerçek issue açmak için test modu kapalı
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO = process.env.GITHUB_REPO;
+const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
+const REPO = process.env.REPO_GITHUB;
 const FAZ_PATH = path.resolve('docs/PRPJECT_FAZ.MD');
 
 if (!GITHUB_TOKEN && !TEST_MODE) {
-  console.error('GITHUB_TOKEN environment variable is not set.');
+  console.error('TOKEN_GITHUB environment variable is not set.');
   process.exit(1);
 }
 
@@ -60,7 +60,7 @@ async function createIssue({ title, body }) {
   const res = await fetch(url, {
     method: 'POST',
     headers: {
-      'Authorization': `Bearer ${GITHUB_TOKEN}`,
+  'Authorization': `Bearer ${GITHUB_TOKEN}`,
       'Accept': 'application/vnd.github+json',
       'Content-Type': 'application/json'
     },

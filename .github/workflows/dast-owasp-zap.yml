@@ -1,0 +1,48 @@
+name: DAST - OWASP ZAP
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: 0 5 * * 1 # Her Pazartesi 05:00'te otomatik DAST
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  zapscan:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Start application (ornek)
+        run: |
+          npm ci
+          npm run build
+          npm start &
+          sleep 30
+
+      
+
+      - name: ZAP Baseline Scan
+        id: zap
+        uses: zaproxy/action-baseline@v0.14.0
+        with:
+          target: http://localhost:4200
+          cmd_options: -a
+          fail_action: false
+          allow_issue_writing: true
+
+      - name: Send email on failure
+        if: failure()
+        uses: dawidd6/action-send-mail@v3
+        with:
+          server_address: ${{ secrets.MAIL_SERVER }}
+          server_port: ${{ secrets.MAIL_PORT }}
+          username: ${{ secrets.MAIL_USERNAME }}
+          password: ${{ secrets.MAIL_PASSWORD }}
+          subject: OWASP ZAP DAST Workflow Failed
+          to: ${{ secrets.MAIL_TO }}
+          from: ${{ secrets.MAIL_FROM }}
+          body: OWASP ZAP DAST workflow failed for ${{ github.repository }} on ${{ github.ref }}. Lütfen inceleyiniz.

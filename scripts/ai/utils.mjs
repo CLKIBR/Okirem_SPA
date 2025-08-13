@@ -6,4 +6,5 @@ export function extractDayTasks(content, today) {
   if (!match) return null;
   const [, dayNum, tasks] = match;
   return { dayNum, tasks: tasks.trim() };
+  // GITHUB_TOKEN veya GITHUB_REPO kullanımı varsa TOKEN_GITHUB ve REPO_GITHUB olarak değiştirildi.
 }

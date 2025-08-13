@@ -58,8 +58,8 @@ import fetch from 'node-fetch';
 import dotenv from 'dotenv';
 dotenv.config();
 
-const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO = process.env.GITHUB_REPO;
+const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
+const REPO = process.env.REPO_GITHUB;
 
 export async function findIssueNumberByTitle(title) {
   const url = `https://api.github.com/repos/${REPO}/issues?state=all&per_page=100`;
