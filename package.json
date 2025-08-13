@@ -2,16 +2,27 @@
   "name": "okirem-spa",
   "version": "0.0.0",
   "scripts": {
-    "ng": "ng",
-    "start": "ng serve",
-    "build": "ng build",
-    "watch": "ng build --watch --configuration development",
-    "test": "ng test",
-    "ai:context": "node scripts/ai/docgen.mjs",
-    "git:issues": "node scripts/ai/create-issues.mjs",
-    "git:pr": "node scripts/ai/create-pr.mjs",
-    "git:start": "node scripts/ai/log-day-plan.mjs start",
-    "git:end": "node scripts/ai/log-day-plan.mjs end"
+  "ng": "ng",
+  "start": "ng serve",
+  "build": "ng build",
+  "watch": "ng build --watch --configuration development",
+  "test": "ng test",
+  "lint": "eslint \"src/**/*.{ts,js}\" --fix",
+  "format": "prettier --write \"src/**/*.{ts,js,scss,css,html}\"",
+  "stylelint": "stylelint \"src/**/*.{css,scss}\" --fix",
+  "prepare": "husky install",
+  "ai:context": "node scripts/ai/docgen.mjs",
+  "git:issues": "node scripts/ai/create-issues.mjs",
+  "git:pr": "node scripts/ai/create-pr.mjs",
+  "git:start": "node scripts/ai/log-day-plan.mjs start",
+  "git:end": "node scripts/ai/log-day-plan.mjs end"
+  },
+  "lint-staged": {
+    "*.ts": ["eslint --fix", "prettier --write"],
+    "*.js": ["eslint --fix", "prettier --write"],
+    "*.scss": ["stylelint --fix", "prettier --write"],
+    "*.css": ["stylelint --fix", "prettier --write"],
+    "*.html": ["prettier --write"]
   },
   "prettier": {
     "overrides": [
@@ -40,12 +51,21 @@
     "@angular/cli": "^20.1.5",
     "@angular/compiler-cli": "^20.1.0",
     "@types/jasmine": "~5.1.0",
+    "eslint": "^9.33.0",
+    "eslint-config-prettier": "^10.1.8",
+    "eslint-plugin-prettier": "^5.5.4",
+    "husky": "^9.1.7",
     "jasmine-core": "~5.8.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "lint-staged": "^16.1.5",
+    "prettier": "^3.6.2",
+    "stylelint": "^14.16.1",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard": "^34.0.0",
     "typescript": "~5.8.2"
   }
 }

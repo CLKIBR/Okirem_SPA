@@ -1,0 +1,7 @@
+{
+  "*.ts": ["eslint --fix", "prettier --write"],
+  "*.js": ["eslint --fix", "prettier --write"],
+  "*.scss": ["stylelint --fix", "prettier --write"],
+  "*.css": ["stylelint --fix", "prettier --write"],
+  "*.html": ["prettier --write"]
+}
