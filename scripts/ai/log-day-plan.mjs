@@ -31,6 +31,51 @@ async function addLog(type) {
   let logContent = '';
   let checklistUpdated = false;
   let note = '';
+  if (type === 'start' && addLog.selectedTitle) {
+    // PRPJECT_FAZ.MD'den başlığa göre maddeleri bul ve loga ekle
+    let fazContent = '';
+    try {
+      fazContent = await fs.readFile(FAZ_PATH, 'utf-8');
+    } catch (e) {
+      fazContent = '';
+    }
+    // Ana başlıkları ve alt maddeleri bul
+    const lines = fazContent.split(/\r?\n/);
+    let found = false;
+    let items = [];
+    for (let i = 0; i < lines.length; i++) {
+      const anaBaslikMatch = lines[i].match(/^- \*\*(.*?)\*\*/);
+      if (anaBaslikMatch && anaBaslikMatch[1] === addLog.selectedTitle) {
+        found = true;
+        // Alt maddeleri topla
+        let j = i + 1;
+        while (j < lines.length) {
+          const altMaddeMatch = lines[j].match(/^\s{4,}- (.*)/);
+          if (altMaddeMatch) {
+            items.push(altMaddeMatch[1]);
+          } else if (lines[j].match(/^- \*\*/)) {
+            break; // Sonraki ana başlığa geçildi
+          }
+          j++;
+        }
+        break;
+      }
+    }
+    // Loga ekle
+    let logContent = '';
+    try {
+      logContent = await fs.readFile(LOG_PATH, 'utf-8');
+    } catch (e) {
+      logContent = '';
+    }
+    let checklist = items.map(m => `- [ ] ${m}`).join('\n');
+    let logBlock = `\n## Gün Başlangıcı — ${today} ${time}\nBaşlık: ${addLog.selectedTitle}\n${checklist}`;
+    logContent += logBlock;
+    await fs.writeFile(LOG_PATH, logContent, 'utf-8');
+    console.log(`Başlık: ${addLog.selectedTitle} için maddeler loga eklendi.`);
+    return;
+  }
+  // ...existing code...
   if (type === 'end' && !addLog.selectedTitle && process.argv.length < 4) {
     try {
       logContent = await fs.readFile(LOG_PATH, 'utf-8');
@@ -39,13 +84,34 @@ async function addLog(type) {
     }
     // Son Gün Başlangıcı bloğunu bul
     const gunBaslangiciRegex = /## Gün Başlangıcı — [^\n]+\n([\s\S]*?)(?=\n## |$)/g;
-    let match, lastBlock = null, lastBlockStart = null, lastBlockEnd = null;
+    let match, lastBlock = null, lastBlockStart = null, lastBlockEnd = null, lastBlockRaw = null;
     while ((match = gunBaslangiciRegex.exec(logContent)) !== null) {
       lastBlock = match[1];
+      lastBlockRaw = match[0];
       lastBlockStart = match.index + match[0].indexOf(match[1]);
       lastBlockEnd = lastBlockStart + match[1].length;
     }
     let tumuBitti = false;
+    let blockTitle = null;
+    if (lastBlockRaw) {
+      // Başlığı çek
+      const titleMatch = lastBlockRaw.match(/Başlık: (.*)/);
+      if (titleMatch) blockTitle = titleMatch[1].trim();
+    }
+    // Başlık varsa GitHub Issues numarasını bul ve yazdır
+    if (blockTitle) {
+      try {
+        const { findIssueNumberByTitle } = await import('./github-issue-utils.mjs');
+        const issueNum = await findIssueNumberByTitle(blockTitle);
+        if (issueNum) {
+          console.log(`GitHub Issue numarası: #${issueNum}`);
+        } else {
+          console.log('GitHub Issue bulunamadı.');
+        }
+      } catch (err) {
+        console.log('GitHub Issue sorgusunda hata:', err.message);
+      }
+    }
     if (lastBlock) {
       // Sadece '- [ ] ...' veya '- [x] ...' ile başlayan satırları bul
       const checklistLines = lastBlock.split('\n').filter(line => /^- \[.\] /.test(line));
@@ -81,6 +147,28 @@ async function addLog(type) {
         checklistUpdated = true;
         // Tüm maddeler bitti mi kontrolü
         tumuBitti = yeniBlockLines.filter(line => /^- \[.\] /.test(line)).every(line => line.startsWith('- [x] '));
+        // GitHub Issue checklistini de güncelle ve yorum ekle
+        if (blockTitle) {
+          try {
+            const { findIssueNumberByTitle, updateIssueChecklist, addIssueComment } = await import('./github-issue-utils.mjs');
+            const issueNum = await findIssueNumberByTitle(blockTitle);
+            if (issueNum) {
+              await updateIssueChecklist(issueNum, secilenler);
+              console.log('GitHub Issue checklist güncellendi.');
+              // Kapanan maddeler için kısa açıklama ekle
+              if (secilenler.length > 0) {
+                const closedItems = secilenler.map(i => checklistLines[i].slice(6)).join(', ');
+                const comment = `Tamamlandı olarak işaretlenen maddeler: ${closedItems}`;
+                await addIssueComment(issueNum, comment);
+                console.log('GitHub Issue yorum eklendi.');
+              }
+            } else {
+              console.log('GitHub Issue bulunamadı, checklist güncellenemedi.');
+            }
+          } catch (err) {
+            console.log('GitHub Issue checklist/yorum güncelleme hatası:', err.message);
+          }
+        }
       }
     }
     let bitisMesaji = tumuBitti

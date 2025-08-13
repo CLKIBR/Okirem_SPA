@@ -7,3 +7,4 @@ Platform: (örn. 5–8. sınıf öğrenim platformu)
 Teknolojiler: Angular, .NET (Clean Architecture), PostgreSQL
 
 ## Günlük Kayıtlar
+

@@ -8,7 +8,7 @@ import 'dotenv/config';
 import readline from 'readline';
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO = 'CLKIBR/Okirem';
+const REPO = process.env.GITHUB_REPO;
 const PLAN_PATH = path.resolve('docs/PROJECT_PLAN_DETAY.md');
 const FAZ_PATH = path.resolve('docs/PRPJECT_FAZ.MD');
 

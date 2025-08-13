@@ -10,7 +10,7 @@ dotenv.config();
 const TEST_MODE = false; // Gerçek issue açmak için test modu kapalı
 
 const GITHUB_TOKEN = process.env.GITHUB_TOKEN;
-const REPO = 'CLKIBR/Okirem';
+const REPO = process.env.GITHUB_REPO;
 const FAZ_PATH = path.resolve('docs/PRPJECT_FAZ.MD');
 
 if (!GITHUB_TOKEN && !TEST_MODE) {

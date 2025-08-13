@@ -6,7 +6,12 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "ai:context": "node scripts/ai/docgen.mjs",
+    "git:issues": "node scripts/ai/create-issues.mjs",
+    "git:pr": "node scripts/ai/create-pr.mjs",
+    "git:start": "node scripts/ai/log-day-plan.mjs start",
+    "git:end": "node scripts/ai/log-day-plan.mjs end"
   },
   "prettier": {
     "overrides": [
