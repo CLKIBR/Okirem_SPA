@@ -197,12 +197,12 @@ Tüm test sonuçları ve coverage (kapsam) raporları, merkezi olarak `docs/cove
 flowchart TD
 	A[Geliştirici Commit/PR] --> B[Pre-commit Lint/Format]
 	B --> C[Pull Request Açılır]
-	C --> D[Otomatik Testler CI]
+	C --> D[Otomatik Testler (CI)]
 	D --> E[Code Review & Onay]
 	E --> F[Main Branch'e Merge]
 	F --> G[Release/Tag Otomasyonu]
 	G --> H[CHANGELOG.md Güncelleme]
-	H --> I[Deploy Opsiyonel]
+	H --> I[Deploy (Opsiyonel)]
 ```
 
 ## Onay Akışları
