@@ -1,3 +1,38 @@
+# <p align="center">
+  <img src="docs/okirem-logo.png" alt="Okirem Kurumsal Logo" width="180" />
+</p>
+
+# OkiremSPA
+
+## Proje Özeti
+OkiremSPA, modern yazılım geliştirme standartlarına uygun, katmanlı mimari ve güçlü CI/CD süreçleriyle kurumsal projeler için tasarlanmış bir Angular uygulamasıdır. Proje, sürdürülebilirlik, güvenlik, kod kalitesi ve ekip işbirliğini ön planda tutar.
+
+## Amaç
+Bu doküman, OkiremSPA projesinin mimari yapısını, geliştirme ve sürümleme süreçlerini, kod standartlarını ve ekip içi işleyişi kurumsal düzeyde tanımlamak amacıyla hazırlanmıştır.
+
+## İçindekiler
+1. [Katman Sınırları ve Sorumlulukları](#katman-sınırları-ve-sorumlulukları)
+2. [DTO ve Mapper Politikaları](#dto-ve-mapper-politikaları)
+3. [Katmanlar Arası Bağımlılık Diyagramı](#katmanlar-arası-bağımlılık-diyagramı)
+4. [Ortam Bazlı Pipeline Varyasyonları](#ortam-bazlı-pipeline-varyasyonları)
+5. [Fail-Fast ve Notification Mekanizmaları](#fail-fast-ve-notification-mekanizmaları)
+6. [Pipeline Adımlarının Loglanması ve İzlenebilirliği](#pipeline-adımlarının-loglanması-ve-izlenebilirliği)
+7. [CI/CD Pipeline'da Güvenlik Taramaları](#cicd-pipeline-da-güvenlik-taramaları)
+8. [Otomatik Build ve Deploy Rollback Senaryoları](#otomatik-build-ve-deploy-rollback-senaryoları)
+9. [Test ve Coverage Raporlarının Merkezi Saklanması](#test-ve-coverage-raporlarının-merkezi-saklanması)
+10. [CI/CD Pipeline Şeması ve Onay Akışları](#cicd-pipeline-şeması-ve-onay-akışları)
+11. [Geriye Dönük Sürüm İnceleme ve Rollback Prosedürleri](#geriye-dönük-sürüm-inceleme-ve-rollback-prosedürleri)
+12. [Sürüm Notlarının Merkezi Depoda Tutulması](#sürüm-notlarının-merkezi-depoda-tutulması)
+13. [Sürüm Etiketleme ve Geri Alma Prosedürleri](#sürüm-etiketleme-ve-geri-alma-prosedürleri)
+14. [Otomatik CHANGELOG ve Sürüm Yönetimi](#otomatik-changelog-ve-sürüm-yönetimi)
+15. [Kod Kalitesi Metriklerinin Periyodik Raporlanması](#kod-kalitesi-metriklerinin-periyodik-raporlanması)
+16. [Otomatik Formatlama ve Linting Scriptleri](#otomatik-formatlama-ve-linting-scriptleri)
+17. [OkiremSPA — Onboarding ve Kod Standartları](#okiremspa--onboarding-ve-kod-standartları)
+18. [TypeScript Strict Modu Politikası](#typescript-strict-modu-politikası)
+19. [Editör ve Kod Stili Standartları](#editör-ve-kod-stili-standartları)
+20. [Kod İnceleme (Code Review) Politikası](#kod-inceleme-code-review-politikası)
+21. [SSS ve Destek](#sss-ve-destek)
+
 # Katman Sınırları ve Sorumlulukları
 
 Proje kod tabanında katmanlar ve sorumlulukları aşağıdaki gibi netleştirilmiştir:
@@ -58,14 +93,9 @@ export function mapUserToUserDto(user: User): UserDto {
 > DTO ve Mapper kullanımı, kodun sürdürülebilirliği, tip güvenliği ve dış sistemlerle entegrasyonun sağlıklı olması için zorunludur.
 # Katmanlar Arası Bağımlılık Diyagramı
 
-```mermaid
-flowchart TD
-	A[UI / Pages] --> B[Features]
-	B --> C[Shared]
-	B --> D[Core]
-	C --> D
-	D --> E[3rd Party / API / Infrastructure]
-```
+<p align="center">
+  <img src="docs/ai/katman-diyagrami.png" alt="Katmanlar Arası Bağımlılık Diyagramı" width="420" />
+</p>
 
 **Açıklama:**
 - UI/Pages katmanı, uygulamanın kullanıcıya gösterilen arayüzünü ve sayfa bileşenlerini içerir.
@@ -167,12 +197,12 @@ Tüm test sonuçları ve coverage (kapsam) raporları, merkezi olarak `docs/cove
 flowchart TD
 	A[Geliştirici Commit/PR] --> B[Pre-commit Lint/Format]
 	B --> C[Pull Request Açılır]
-	C --> D[Otomatik Testler (CI)]
+	C --> D[Otomatik Testler CI]
 	D --> E[Code Review & Onay]
 	E --> F[Main Branch'e Merge]
 	F --> G[Release/Tag Otomasyonu]
 	G --> H[CHANGELOG.md Güncelleme]
-	H --> I[Deploy (Opsiyonel)]
+	H --> I[Deploy Opsiyonel]
 ```
 
 ## Onay Akışları
@@ -347,3 +377,18 @@ Angular CLI does not come with an end-to-end testing framework by default. You c
 ## Additional Resources
 
 For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+# SSS ve Destek
+
+### Sıkça Sorulan Sorular (FAQ)
+
+- **Proje ile ilgili teknik destek için kimle iletişime geçmeliyim?**
+  - Ekip lideriniz veya proje yöneticiniz ile iletişime geçebilirsiniz.
+- **Kurulumda hata alırsam ne yapmalıyım?**
+  - README ve docs/PROJECT_SNAPSHOT.md dosyasındaki adımları tekrar kontrol edin.
+- **Katman mimarisiyle ilgili sorularım için hangi dokümana bakmalıyım?**
+  - README’deki ilgili başlıklar ve docs/ai/GUNLUK_RUTIN.md dosyasını inceleyin.
+
+### Destek
+
+- Teknik destek ve öneriler için: [destek@okirem.com](mailto:destek@okirem.com)
+- Proje yönetimi ve süreçler için: [proje@okirem.com](mailto:proje@okirem.com)

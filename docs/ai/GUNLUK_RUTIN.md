@@ -2,6 +2,32 @@
 
 Her gün uygulamanız gereken adımlar ve komutlar:
 
+## Günlük Güncellenmesi Gereken Başlıklar
+
+- Katman Sınırları ve Sorumlulukları
+- DTO ve Mapper Politikaları
+- Katmanlar Arası Bağımlılık Diyagramı
+- Ortam Bazlı Pipeline Varyasyonları
+- CI/CD Pipeline'da Güvenlik Taramaları
+- Test ve Coverage Raporlarının Merkezi Saklanması
+- Sürüm Notlarının Merkezi Depoda Tutulması
+- Kod Kalitesi Metriklerinin Periyodik Raporlanması
+
+## Günlük Kontrollerin Yapılacağı Başlıklar
+
+- Fail-Fast ve Notification Mekanizmaları
+- Pipeline Adımlarının Loglanması ve İzlenebilirliği
+- Otomatik Build ve Deploy Rollback Senaryoları
+- CI/CD Pipeline Şeması ve Onay Akışları
+- Geriye Dönük Sürüm İnceleme ve Rollback Prosedürleri
+- Sürüm Etiketleme ve Geri Alma Prosedürleri
+- Otomatik CHANGELOG ve Sürüm Yönetimi
+- Otomatik Formatlama ve Linting Scriptleri
+- OkiremSPA — Onboarding ve Kod Standartları
+- TypeScript Strict Modu Politikası
+- Editör ve Kod Stili Standartları
+- Kod İnceleme (Code Review) Politikası
+
 ---
 
 ## Gün Başlangıcı
