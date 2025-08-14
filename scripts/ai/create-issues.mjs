@@ -4,17 +4,16 @@
 import fs from 'fs/promises';
 import path from 'path';
 import fetch from 'node-fetch';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const TEST_MODE = false; // Gerçek issue açmak için test modu kapalı
 
+// GitHub Actions ortamında secrets parametre olarak aktarılır
 const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
 const REPO = process.env.REPO_GITHUB;
 const FAZ_PATH = path.resolve('docs/PRPJECT_FAZ.MD');
 
 if (!GITHUB_TOKEN && !TEST_MODE) {
-  console.error('TOKEN_GITHUB environment variable is not set.');
+  console.error('GITHUB_TOKEN environment variable is not set.');
   process.exit(1);
 }
 

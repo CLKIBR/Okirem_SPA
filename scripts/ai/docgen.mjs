@@ -118,8 +118,13 @@ const fazlar = await getFazSummary(fazPath);
 const allTitles = await getAllIssueTitles(fazPath);
 let selectedTitle = allTitles[0];
 if (allTitles.length > 0) {
-  selectedTitle = await askIssueTitle(allTitles);
+  if (process.env.CI) {
+    selectedTitle = allTitles[0]; // Default to the first title in CI environments
+  } else {
+    selectedTitle = await askIssueTitle(allTitles);
+  }
 }
+
 let fazSection = '';
 if (fazlar && fazlar.length > 0) {
   // Sadece seçilen başlığa ait alt maddeleri ekle

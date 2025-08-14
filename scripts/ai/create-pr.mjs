@@ -4,7 +4,7 @@
 import fs from 'fs/promises';
 import path from 'path';
 import fetch from 'node-fetch';
-import 'dotenv/config';
+
 import readline from 'readline';
 
 const GITHUB_TOKEN = process.env.TOKEN_GITHUB;

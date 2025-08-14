@@ -55,8 +55,6 @@ export async function updateIssueChecklist(issueNumber, checkedIndexes) {
 // github-issue-utils.mjs
 // Başlık ile GitHub Issues numarasını bulmak için fonksiyon
 import fetch from 'node-fetch';
-import dotenv from 'dotenv';
-dotenv.config();
 
 const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
 const REPO = process.env.REPO_GITHUB;
