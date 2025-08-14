@@ -165,14 +165,14 @@ Tüm test sonuçları ve coverage (kapsam) raporları, merkezi olarak `docs/cove
 ## Pipeline Şeması
 ```mermaid
 flowchart TD
-	A[Geliştirici Commit/PR] --> B[Pre-commit Lint/Format]
-	B --> C[Pull Request Açılır]
-	C --> D[Otomatik Testler (CI)]
-	D --> E[Code Review & Onay]
-	E --> F[Main Branch'e Merge]
-	F --> G[Release/Tag Otomasyonu]
-	G --> H[CHANGELOG.md Güncelleme]
-	H --> I[Deploy (Opsiyonel)]
+    A[Gelistirici Commit/PR] --> B[Pre-commit Lint/Format]
+    B --> C[Pull Request Acilir]
+    C --> D[Otomatik Testler (CI)]
+    D --> E[Code Review ve Onay]
+    E --> F[Main Branch'e Merge]
+    F --> G[Release/Tag Otomasyonu]
+    G --> H[CHANGELOG.md Guncelleme]
+    H --> I[Deploy (Opsiyonel)]
 ```
 
 ## Onay Akışları
