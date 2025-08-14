@@ -1,0 +1,29 @@
+export interface TeacherProfile {
+  id?: string;
+  userId: string;
+  firstName: string;
+  lastName: string;
+  profileImageUrl?: string;
+  email: string;
+  alternateEmail?: string;
+  phoneNumber?: string;
+  alternatePhoneNumber?: string;
+  locale?: string;
+  isActive: boolean;
+  gender?: number;
+  birthDate?: string;
+  country?: string;
+  city?: string;
+  district?: string;
+  addressLine1?: string;
+  addressLine2?: string;
+  postalCode?: string;
+  linkedInUrl?: string;
+  twitterUrl?: string;
+  branch?: string;
+  schoolId?: string;
+  isArchived?: boolean;
+  notes?: string;
+  tagsJson?: string;
+  metadataJson?: string;
+}

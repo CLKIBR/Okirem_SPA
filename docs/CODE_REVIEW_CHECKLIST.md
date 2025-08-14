@@ -60,6 +60,15 @@ Kurumsal kod kalitesini ve sürdürülebilirliği sağlamak için kod incelemele
 - [ ] Güvenlik testleri (statik/dinamik analiz, dependency scanning vb.) otomatik olarak çalıştırılıyor ve sonuçları loglanıyor mu?
 
 ## 6. Dokümantasyon
+## 7. Gözlemlenebilirlik (Observability)
+- [ ] Uygulama logları merkezi bir sistemde toplanıyor ve erişilebiliyor mu?
+- [ ] Log ve metrikler merkezi bir izleme sistemine (örn. ELK, Grafana, Prometheus, Sentry vb.) entegre edildi mi?
+- [ ] Hata ve istisnalar (exceptions) otomatik olarak loglanıyor mu?
+- [ ] Performans ve sağlık metrikleri (CPU, bellek, response time vb.) izleniyor mu?
+- [ ] Dış servis ve API çağrıları izleniyor ve loglanıyor mu?
+- [ ] İzleme (tracing) ile isteklerin uçtan uca takibi yapılabiliyor mu?
+- [ ] Uyarı/alarm mekanizmaları tanımlı ve test edilmiş mi?
+- [ ] Log ve metrikler için saklama ve erişim politikaları belirlenmiş mi?
 - [ ] Fonksiyonlar, bileşenler ve önemli iş akışları yeterince dokümante edilmiş mi?
 - [ ] Gerekli ise README veya ilgili dokümanlar güncellendi mi?
 - [ ] Güvenlik ile ilgili dokümantasyon merkezi bir depoda güncel olarak tutuluyor mu?
