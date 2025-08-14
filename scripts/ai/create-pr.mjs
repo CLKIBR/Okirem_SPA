@@ -1,13 +1,18 @@
 // create-pr.mjs
 // PROJECT_PLAN_DETAY.md dosyasındaki bugünkü görevleri başlık ve açıklama olarak kullanarak otomatik PR açar
 
+
 import fs from 'fs/promises';
 import path from 'path';
 import fetch from 'node-fetch';
+import { logSecretAccess } from './utils.mjs';
 
 import readline from 'readline';
 
 const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
+if (GITHUB_TOKEN) {
+  logSecretAccess('script', 'TOKEN_GITHUB', 'GitHub PR oluşturma');
+}
 const REPO = process.env.REPO_GITHUB;
 const PLAN_PATH = path.resolve('docs/PROJECT_PLAN_DETAY.md');
 const FAZ_PATH = path.resolve('docs/PRPJECT_FAZ.MD');

@@ -2,12 +2,17 @@
 // Bu script, docs/ai/GUNLUK_RUTIN.md dosyasındaki güncellenmesi gereken başlıkları Copilot/OpenAI API ile günceller.
 // Gerekli: OPENAI_API_KEY (GitHub Secrets üzerinden alınmalı)
 
+
 import fs from 'fs/promises';
 import path from 'path';
 import fetch from 'node-fetch';
+import { logSecretAccess } from './utils.mjs';
 
 const GUNLUK_RUTIN_PATH = path.join('docs', 'ai', 'GUNLUK_RUTIN_TEST.md');
 const OPENAI_API_KEY = process.env.OPENAI_API_KEY;
+if (OPENAI_API_KEY) {
+  logSecretAccess('script', 'OPENAI_API_KEY', 'OpenAI API kullanımı');
+}
 
 if (!OPENAI_API_KEY) {
   console.error('OPENAI_API_KEY environment variable is not set.');

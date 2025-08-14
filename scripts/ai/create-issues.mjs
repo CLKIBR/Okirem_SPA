@@ -1,14 +1,19 @@
 // create-issues.mjs
 // PRPJECT_FAZ.MD dosyasındaki faz/başlıkları ayrıştırıp GitHub Issues olarak açar
 
+
 import fs from 'fs/promises';
 import path from 'path';
 import fetch from 'node-fetch';
+import { logSecretAccess } from './utils.mjs';
 
 const TEST_MODE = false; // Gerçek issue açmak için test modu kapalı
 
 // GitHub Actions ortamında secrets parametre olarak aktarılır
 const GITHUB_TOKEN = process.env.TOKEN_GITHUB;
+if (GITHUB_TOKEN) {
+  logSecretAccess('script', 'TOKEN_GITHUB', 'GitHub Issue oluşturma');
+}
 const REPO = process.env.REPO_GITHUB;
 const FAZ_PATH = path.resolve('docs/PRPJECT_FAZ.MD');
 
