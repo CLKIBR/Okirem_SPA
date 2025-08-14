@@ -1,0 +1,31 @@
+# Otomatik Günlük Rutin Başlık Güncelleme
+# Bu workflow, her akşam 21:00'da docs/ai/GUNLUK_RUTIN.md dosyasındaki başlıkları otomatik günceller.
+
+name: Update Gunluk Rutin
+
+on:
+  schedule:
+    - cron: '0 18 * * *' # UTC saatiyle 21:00 Türkiye saati
+  workflow_dispatch:
+
+jobs:
+  update-gunluk-rutin:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20.x'
+      - name: Install dependencies
+        run: npm ci
+      - name: Update Gunluk Rutin
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node ./scripts/ai/update-gunluk-rutin.mjs
+      - name: Commit and push changes
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: 'docs: Günlük rutin başlıkları otomatik güncellendi'
+          file_pattern: 'docs/ai/GUNLUK_RUTIN.md'
